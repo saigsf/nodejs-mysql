@@ -124,4 +124,95 @@ connection.connect(); #创建链接
 http://www.cnblogs.com/yunf/archive/2011/04/12/2013448.html
 
 
+## 遇到的问题
+1、在一面中打开http://localhost:3000/时，浏览器显示出一段字符串：
+```
+<!DOCTYPE html><html><head><title>Express</title><link rel="stylesheet"  href="/stylesheets/style.css"></head><body><h1>Express</h1><p>Welcome to Express</p></body><html>
+```
+说明页面没有解析出html标签
+### 解决
+在工程文件中找到 view/layout.jade文件 在里面添加一句：
+```
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+```
+
+## 启动优化
+
+### 方案一使用nodemon
+[nodemon](https://www.npmjs.com/package/nodemon)
+#### 安装
+全局安装
+```
+$ npm install -g nodemon/cnpm install -g nodemon
+```
+本地安装
+```
+$ npm install --save-dev nodemon
+```
+#### 使用
+```
+supervisor ./bin/www
+```
+#### 配置package.json
+在package.json文件的"scripts"选项中添加"dev": "nodemon ./bin/www"
+```
+"scripts": {
+        "start": "node ./bin/www",
+        "dev": "nodemon ./bin/www"
+    },
+```
+#### 启动
+```
+npm run dev
+```
+
+
+### 方案二使用supervisor
+[supervisor](https://www.npmjs.com/package/supervisor)
+#### 安装
+```
+$ npm install supervisor -g
+```
+#### 使用
+```
+supervisor ./bin/www
+```
+#### 配置package.json
+```
+"scripts": {
+        "start": "node ./bin/www",
+        "sup": "supervisor ./bin/www"
+    },
+```
+#### 启动
+```
+npm run sup
+```
+### 方案三使用pm2
+[pm2](https://www.npmjs.com/package/pm2)
+#### 安装
+```
+$ npm install pm2 -g
+```
+#### 使用
+```
+$ pm2 start ./bin/www
+```
+#### 配置package.json
+```
+"scripts": {
+        "start": "node ./bin/www",
+        "pmStart": "pm2 start ./bin/www"
+    },
+```
+#### 启动
+```
+npm run pmStart
+```
+
+待续···
+
+
+
+
 
