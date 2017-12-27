@@ -151,7 +151,7 @@ $ npm install --save-dev nodemon
 ```
 #### 使用
 ```
-supervisor ./bin/www
+nodemon ./bin/www
 ```
 #### 配置package.json
 在package.json文件的"scripts"选项中添加"dev": "nodemon ./bin/www"
